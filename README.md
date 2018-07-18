@@ -1,1 +1,1 @@
-# moodle_block-event-tracker-graph
+# Event tracker block for moodle
