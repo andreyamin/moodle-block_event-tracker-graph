@@ -31,22 +31,22 @@ defined('MOODLE_INTERNAL') || die();
 class block_event_tracker_graph extends block_base {
 
     /**
-    * Init function
-    */
+     * Init function
+     */
     public function init() {
         $this->title = get_string('event_tracker_graph', 'block_event_tracker_graph');
     }
 
     /**
-    * Instance allow multiple function
-    */
+     * Instance allow multiple function
+     */
     public function instance_allow_multiple() {
         return true;
     }
 
     /**
-    * Specialization function
-    */
+     * Specialization function
+     */
     public function specialization() {
         if (isset($this->config)) {
             if (empty($this->config->title)) {
@@ -58,8 +58,8 @@ class block_event_tracker_graph extends block_base {
     }
 
     /**
-    * Get content function
-    */
+     * Get content function
+     */
     public function get_content() {
 
         Global $OUTPUT, $DB;
@@ -161,7 +161,7 @@ class block_event_tracker_graph extends block_base {
         $eventlist = report_eventlist_list_generator::get_all_events_list();
 
         if ($e1) {
-            if (isset($this->config->customlabel1)){
+            if (isset($this->config->customlabel1)) {
                 if (!empty($this->config->customlabel1)) {
                     $label1 = $this->config->customlabel1;
                 } else {
@@ -175,7 +175,7 @@ class block_event_tracker_graph extends block_base {
             $chart->add_series($series1);
         }
         if ($e2) {
-            if (isset($this->config->customlabel2)){
+            if (isset($this->config->customlabel2)) {
                 if (!empty($this->config->customlabel2)) {
                     $label2 = $this->config->customlabel2;
                 } else {
@@ -188,7 +188,7 @@ class block_event_tracker_graph extends block_base {
             $chart->add_series($series2);
         }
         if ($e3) {
-            if (isset($this->config->customlabel3)){
+            if (isset($this->config->customlabel3)) {
                 if (!empty($this->config->customlabel3)) {
                     $label3 = $this->config->customlabel3;
                 } else {
@@ -201,7 +201,7 @@ class block_event_tracker_graph extends block_base {
             $chart->add_series($series3);
         }
         if ($e4) {
-            if (isset($this->config->customlabel4)){
+            if (isset($this->config->customlabel4)) {
                 if (!empty($this->config->customlabel4)) {
                     $label4 = $this->config->customlabel4;
                 } else {
@@ -214,7 +214,7 @@ class block_event_tracker_graph extends block_base {
             $chart->add_series($series4);
         }
         if ($e5) {
-            if (isset($this->config->customlabel5)){
+            if (isset($this->config->customlabel5)) {
                 if (!empty($this->config->customlabel5)) {
                     $label5 = $this->config->customlabel5;
                 } else {
@@ -226,7 +226,6 @@ class block_event_tracker_graph extends block_base {
             $series5 = new \core\chart_series($label5, $s5);
             $chart->add_series($series5);
         }
-
 
         $chart->set_labels($days);
 
@@ -242,7 +241,7 @@ class block_event_tracker_graph extends block_base {
 
         $html = $OUTPUT->render_chart($chart, $showchartdata);
 
-        $this->content         =  new stdClass;
+        $this->content         = new stdClass;
         $this->content->text   = $html;
         $this->content->footer = '';
 
