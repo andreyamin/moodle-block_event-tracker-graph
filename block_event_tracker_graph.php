@@ -26,8 +26,9 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Event tracker block class
+ * @copyright  2018 Andre Yamin
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 class block_event_tracker_graph extends block_base {
 
     /**

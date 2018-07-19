@@ -26,11 +26,15 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Event tracker graph block edit form
+ *
+ * @copyright  2018 Andre Yamin
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class block_event_tracker_graph_edit_form extends block_edit_form {
 
     /**
      * Block form definition function
+     * @param MoodleQuickForm $mform
      */
     protected function specific_definition($mform) {
 
