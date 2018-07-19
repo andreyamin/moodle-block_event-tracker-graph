@@ -21,7 +21,10 @@
  * @copyright  2018 Andre Yamin
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-    $capabilities = array(
+
+defined('MOODLE_INTERNAL') || die();
+
+$capabilities = array(
  
     'block/event_tracker_graph:myaddinstance' => array(
         'captype' => 'write',
@@ -29,20 +32,20 @@
         'archetypes' => array(
             'user' => CAP_ALLOW
         ),
- 
+
         'clonepermissionsfrom' => 'moodle/my:manageblocks'
     ),
- 
+
     'block/event_tracker_graph:addinstance' => array(
         'riskbitmask' => RISK_SPAM | RISK_XSS,
- 
+
         'captype' => 'write',
         'contextlevel' => CONTEXT_BLOCK,
         'archetypes' => array(
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         ),
- 
-        'clonepermissionsfrom' => 'moodle/site:manageblocks'
+
+    'clonepermissionsfrom' => 'moodle/site:manageblocks'
     ),
 );

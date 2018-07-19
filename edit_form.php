@@ -21,23 +21,31 @@
  * @copyright  2018 Andre Yamin
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- 
+
+defined('MOODLE_INTERNAL') || die();
+
+/**
+* Event tracker graph block edit form
+*/
 class block_event_tracker_graph_edit_form extends block_edit_form {
- 
+
+    /**
+	* Block form definition function
+	*/
     protected function specific_definition($mform) {
- 
-        // Section header title according to language file.
-        $mform->addElement('header', 'config_header', get_string('blocksettings', 'block'));
- 
-        // A sample string variable with a default value.
-        $mform->addElement('text', 'config_title', get_string('blocktitle', 'block_event_tracker_graph'));
-        $mform->setType('config_title', PARAM_TEXT);
 
-        $mform->addElement('advcheckbox', 'config_showchartdata', get_string('showchartdata', 'block_event_tracker_graph'));
+		// Section header title according to language file.
+		$mform->addElement('header', 'config_header', get_string('blocksettings', 'block'));
 
-        $events = report_eventlist_list_generator::get_all_events_list(false);
+		// A sample string variable with a default value.
+		$mform->addElement('text', 'config_title', get_string('blocktitle', 'block_event_tracker_graph'));
+		$mform->setType('config_title', PARAM_TEXT);
 
-        //Event 1 options
+		$mform->addElement('advcheckbox', 'config_showchartdata', get_string('showchartdata', 'block_event_tracker_graph'));
+
+		$events = report_eventlist_list_generator::get_all_events_list(false);
+
+        //Event 1 options.
         $mform->addElement('header', 'config_header', get_string('event1', 'block_event_tracker_graph'));
         $mform->addElement('advcheckbox', 'config_event1enabled', get_string('enablevent1', 'block_event_tracker_graph'));
         $mform->addElement('select', 'config_event1', get_string('event1', 'block_event_tracker_graph'), $events);
@@ -46,7 +54,7 @@ class block_event_tracker_graph_edit_form extends block_edit_form {
         $mform->addElement('text', 'config_customlabel1', get_string('customlabel', 'block_event_tracker_graph'));
         $mform->setType('config_customlabel1', PARAM_TEXT);
 
-		//Event 2 options
+		//Event 2 options.
         $mform->addElement('header', 'config_header', get_string('event2', 'block_event_tracker_graph'));
 		$mform->addElement('advcheckbox', 'config_event2enabled', get_string('enablevent2', 'block_event_tracker_graph'));
 		$mform->addElement('select', 'config_event2', get_string('event2', 'block_event_tracker_graph'), $events);
@@ -55,32 +63,32 @@ class block_event_tracker_graph_edit_form extends block_edit_form {
 		$mform->addElement('text', 'config_customlabel2', get_string('customlabel', 'block_event_tracker_graph'));
         $mform->setType('config_customlabel2', PARAM_TEXT);
 		
-		//Event 3 options
+		//Event 3 options.
 		$mform->addElement('header', 'config_header', get_string('event3', 'block_event_tracker_graph'));
 		$mform->addElement('advcheckbox', 'config_event3enabled', get_string('enablevent3', 'block_event_tracker_graph'));
 		$mform->addElement('select', 'config_event3', get_string('event3', 'block_event_tracker_graph'), $events);
 		$mform->setType('config_event3', PARAM_TEXT);
 
 		$mform->addElement('text', 'config_customlabel3', get_string('customlabel', 'block_event_tracker_graph'));
-        $mform->setType('config_customlabel3', PARAM_TEXT);
-		
-		//Event 4 options
+		$mform->setType('config_customlabel3', PARAM_TEXT);
+
+		//Event 4 options.
 		$mform->addElement('header', 'config_header', get_string('event4', 'block_event_tracker_graph'));
 		$mform->addElement('advcheckbox', 'config_event4enabled', get_string('enablevent4', 'block_event_tracker_graph'));
 		$mform->addElement('select', 'config_event4', get_string('event4', 'block_event_tracker_graph'), $events);
 		$mform->setType('config_event4', PARAM_TEXT);
 
 		$mform->addElement('text', 'config_customlabel4', get_string('customlabel', 'block_event_tracker_graph'));
-        $mform->setType('config_customlabel4', PARAM_TEXT);
+		$mform->setType('config_customlabel4', PARAM_TEXT);
 
-		//Event 5 options
+		//Event 5 options.
 		$mform->addElement('header', 'config_header', get_string('event5', 'block_event_tracker_graph'));
 		$mform->addElement('advcheckbox', 'config_event5enabled', get_string('enablevent5', 'block_event_tracker_graph'));
 		$mform->addElement('select', 'config_event5', get_string('event5', 'block_event_tracker_graph'), $events);
 		$mform->setType('config_event', PARAM_TEXT);
 
 		$mform->addElement('text', 'config_customlabel5', get_string('customlabel', 'block_event_tracker_graph'));
-        $mform->setType('config_customlabel5', PARAM_TEXT);
+		$mform->setType('config_customlabel5', PARAM_TEXT);
 
     }
 }

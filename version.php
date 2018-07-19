@@ -22,7 +22,9 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$plugin->component = 'block_event_tracker_graph';  
+defined('MOODLE_INTERNAL') || die();
+
+$plugin->component = 'block_event_tracker_graph';
 $plugin->version = 2018071700;
 $plugin->release = '3.5';
 $plugin->requires = 2018051700;

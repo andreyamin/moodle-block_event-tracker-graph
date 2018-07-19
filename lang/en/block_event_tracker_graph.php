@@ -22,6 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 $string['pluginname'] = 'Event tracker';
 $string['event_tracker_graph'] = 'Event tracker graph';
 $string['event_tracker_graph:addinstance'] = 'Add a new Event tracker graph block';
