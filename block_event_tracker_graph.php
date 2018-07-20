@@ -240,6 +240,18 @@ class block_event_tracker_graph extends block_base {
             $showchartdata = false;
         }
 
+        if (isset($this->config->smooth)) {
+            if ($this->config->smooth == 1) {
+                $smooth = true;
+            } else {
+                $smooth = false;
+            }
+        } else {
+            $smooth = false;
+        }
+
+        $chart->set_smooth($smooth);
+
         $html = $OUTPUT->render_chart($chart, $showchartdata);
 
         $this->content         = new stdClass;
