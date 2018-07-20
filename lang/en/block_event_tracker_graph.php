@@ -47,3 +47,4 @@ $string['enablevent5'] = 'Enable data series 5';
 $string['showchartdata'] = 'Show chart data';
 $string['customlabel'] = 'Custom label';
 $string['defaulttitle'] = 'Default title';
+$string['smooth'] = 'Smooth lines';
