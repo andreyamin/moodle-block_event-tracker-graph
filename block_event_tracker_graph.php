@@ -22,214 +22,230 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * Event tracker block class
+ * @copyright  2018 Andre Yamin
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class block_event_tracker_graph extends block_base {
 
+    /**
+     * Init function
+     */
     public function init() {
         $this->title = get_string('event_tracker_graph', 'block_event_tracker_graph');
     }
-    
-    public function instance_allow_multiple() {
-		return true;
-	}
 
-    public function specialization() {
-    	if (isset($this->config)) {
-	        if (empty($this->config->title)) {
-	            $this->title = get_string('pluginname', 'block_event_tracker_graph');            
-	        } else {
-	            $this->title = $this->config->title;
-	        }
-	    }
+    /**
+     * Instance allow multiple function
+     */
+    public function instance_allow_multiple() {
+        return true;
     }
 
+    /**
+     * Specialization function
+     */
+    public function specialization() {
+        if (isset($this->config)) {
+            if (empty($this->config->title)) {
+                $this->title = get_string('pluginname', 'block_event_tracker_graph');
+            } else {
+                $this->title = $this->config->title;
+            }
+        }
+    }
+
+    /**
+     * Get content function
+     */
     public function get_content() {
 
-    	Global $OUTPUT, $DB;
+        Global $OUTPUT, $DB;
 
-	    if ($this->content !== null) {
-	      return $this->content;
-	    }
+        if ($this->content !== null) {
+            return $this->content;
+        }
 
-		$wag = new DateTime("-1 week", core_date::get_server_timezone_object());
-		$wag->setTime(0, 0, 0);
-		$start = $wag->getTimestamp();
+        $wag = new DateTime("-1 week", core_date::get_server_timezone_object());
+        $wag->setTime(0, 0, 0);
+        $start = $wag->getTimestamp();
 
+        $days = $s1 = $s2 = $s3 = $s4 = $s5 = array();
 
-		$days = $s1 = $s2 = $s3 = $s4 = $s5 = array();
+        if (isset($this->config->event1enabled)) {
+            $e1 = ($this->config->event1enabled == 1) ? true : false;
+        } else {
+            $e1 = false;
+        }
+        if (isset($this->config->event2enabled)) {
+            $e2 = ($this->config->event2enabled == 1) ? true : false;
+        } else {
+            $e2 = false;
+        }
+        if (isset($this->config->event3enabled)) {
+            $e3 = ($this->config->event3enabled == 1) ? true : false;
+        } else {
+            $e3 = false;
+        }
+        if (isset($this->config->event4enabled)) {
+            $e4 = ($this->config->event4enabled == 1) ? true : false;
+        } else {
+            $e4 = false;
+        }
+        if (isset($this->config->event5enabled)) {
+            $e5 = ($this->config->event5enabled == 1) ? true : false;
+        } else {
+            $e5 = false;
+        }
 
-		if (isset($this->config->event1enabled)) {
-			$e1 = ($this->config->event1enabled == 1) ? True : False;
-		} else {
-			$e1 = False;
-		}
-		if (isset($this->config->event2enabled)) {
-			$e2 = ($this->config->event2enabled == 1) ? True : False;
-		} else {
-			$e2 = false;
-		}
-		if (isset($this->config->event3enabled)) {
-			$e3 = ($this->config->event3enabled == 1) ? True : False;
-		} else {
-			$e3 = false;
-		}
-		if (isset($this->config->event4enabled)) {
-			$e4 = ($this->config->event4enabled == 1) ? True : False;
-		} else {
-			$e4 = false;
-		}
-		if (isset($this->config->event5enabled)) {
-			$e5 = ($this->config->event5enabled == 1) ? True : False;
-		} else {
-			$e5 = false;
-		}
+        $wd = [
+            1 => 'Sunday',
+            2 => 'Monday',
+            3 => 'Tuesday',
+            4 => 'Wednesday',
+            5 => 'Thursday',
+            6 => 'Friday',
+            7 => 'Saturday'
+            ];
 
-		$wd = [
-			1 => 'Sunday',
-			2 => 'Monday',
-			3 => 'Tuesday',
-			4 => 'Wednesday',
-			5 => 'Thursday',
-			6 => 'Friday',
-			7 => 'Saturday'
-			];
+        for ($i = 1; $i <= 7; $i++) {
 
-		for ($i=1; $i<=7; $i++) {
-			
-			$timefrom = $start + $i * 24 * 3600;
-			$timeto = $timefrom + 24 * 3600;
+            $timefrom = $start + $i * 24 * 3600;
+            $timeto = $timefrom + 24 * 3600;
 
-			$basecond = "timecreated > " . $timefrom . " AND timecreated < " . $timeto;
-		    
-		    if ($e1) {
-		       	
-		       	$event1 = $this->config->event1;
-		    	$cond1 = $basecond . " AND eventname = '" . $event1 . "'";
-				$s1[] = $DB->count_records_select('logstore_standard_log', $cond1);
+            $basecond = "timecreated > " . $timefrom . " AND timecreated < " . $timeto;
 
-			}
-		    if ($e1) {
-		       	
-		       	$event2 = $this->config->event2;
-		    	$cond2 = $basecond . " AND eventname = '" . $event2 . "'";
-				$s2[] = $DB->count_records_select('logstore_standard_log', $cond2);
+            if ($e1) {
 
-			}
-			if ($e3) {
-		       	
-		       	$event3 = $this->config->event3;
-		    	$cond3 = $basecond . " AND eventname = '" . $event3 . "'";
-				$s3[] = $DB->count_records_select('logstore_standard_log', $cond3);
+                $event1 = $this->config->event1;
+                $cond1 = $basecond . " AND eventname = '" . $event1 . "'";
+                $s1[] = $DB->count_records_select('logstore_standard_log', $cond1);
 
-			}
-			if ($e4) {
-		       	
-		       	$event4 = $this->config->event4;
-		    	$cond4 = $basecond . " AND eventname = '" . $event4 . "'";
-				$s4[] = $DB->count_records_select('logstore_standard_log', $cond4);
+            }
+            if ($e1) {
 
-			}
-			if ($e5) {
-		       	
-		       	$event5 = $this->config->event5;
-		    	$cond5 = $basecond . " AND eventname = '" . $event5 . "'";
-				$s5[] = $DB->count_records_select('logstore_standard_log', $cond5);
+                $event2 = $this->config->event2;
+                $cond2 = $basecond . " AND eventname = '" . $event2 . "'";
+                $s2[] = $DB->count_records_select('logstore_standard_log', $cond2);
 
-			}
+            }
+            if ($e3) {
 
-			$days[] = $wd[date('N', $timeto)];
-		}
+                $event3 = $this->config->event3;
+                $cond3 = $basecond . " AND eventname = '" . $event3 . "'";
+                $s3[] = $DB->count_records_select('logstore_standard_log', $cond3);
 
-		$chart = new \core\chart_line();
+            }
+            if ($e4) {
 
-		$eventlist = report_eventlist_list_generator::get_all_events_list();
+                $event4 = $this->config->event4;
+                $cond4 = $basecond . " AND eventname = '" . $event4 . "'";
+                $s4[] = $DB->count_records_select('logstore_standard_log', $cond4);
 
-	    if ($e1) {
-	    	if (isset($this->config->customlabel1)){
-	    		if (!empty($this->config->customlabel1)) {
-	    			$label1 = $this->config->customlabel1;
-	    		} else {
-	    			$label1 = $eventlist[$event1]["raweventname"];
-	    		}
-	    	} else {
-	    			$label1 = $eventlist[$event1]["raweventname"];
-	    	}
+            }
+            if ($e5) {
 
-			$series1 = new \core\chart_series($label1, $s1);
-			$chart->add_series($series1);
-		}
-		if ($e2) {
-	    	if (isset($this->config->customlabel2)){
-	    		if (!empty($this->config->customlabel2)) {
-	    			$label2 = $this->config->customlabel2;
-	    		} else {
-	    			$label2 = $eventlist[$event2]["raweventname"];
-	    		}
-	    	} else {
-	    			$label2 = $eventlist[$event2]["raweventname"];
-	    	}
-			$series2 = new \core\chart_series($label2, $s2);
-			$chart->add_series($series2);
-		}
-		if ($e3) {
-	    	if (isset($this->config->customlabel3)){
-	    		if (!empty($this->config->customlabel3)) {
-	    			$label3 = $this->config->customlabel3;
-	    		} else {
-	    			$label3 = $eventlist[$event3]["raweventname"];
-	    		}
-	    	} else {
-	    			$label3 = $eventlist[$event3]["raweventname"];
-	    	}
-			$series3 = new \core\chart_series($label3, $s3);
-			$chart->add_series($series3);
-		}
-		if ($e4) {
-	    	if (isset($this->config->customlabel4)){
-	    		if (!empty($this->config->customlabel4)) {
-	    			$label4 = $this->config->customlabel4;
-	    		} else {
-	    			$label4 = $eventlist[$event4]["raweventname"];
-	    		}
-	    	} else {
-	    			$label4 = $eventlist[$event4]["raweventname"];
-	    	}
-			$series4 = new \core\chart_series($label4, $s4);
-			$chart->add_series($series4);
-		}
-		if ($e5) {
-	    	if (isset($this->config->customlabel5)){
-	    		if (!empty($this->config->customlabel5)) {
-	    			$label5 = $this->config->customlabel5;
-	    		} else {
-	    			$label5 = $eventlist[$event5]["raweventname"];
-	    		}
-	    	} else {
-	    			$label5 = $eventlist[$event5]["raweventname"];
-	    	}
-			$series5 = new \core\chart_series($label5, $s5);
-			$chart->add_series($series5);
-		}
+                $event5 = $this->config->event5;
+                $cond5 = $basecond . " AND eventname = '" . $event5 . "'";
+                $s5[] = $DB->count_records_select('logstore_standard_log', $cond5);
 
-		
-		$chart->set_labels($days);
+            }
 
-		if (isset($this->config->showchartdata)) {
-			if ($this->config->showchartdata == 1) {
-				$showchartdata = True;
-			} else {
-				$showchartdata = False;
-			}
-		} else {
-			$showchartdata = False;
-		}
-		
+            $days[] = $wd[date('N', $timeto)];
+        }
 
-		$html = $OUTPUT->render_chart($chart, $showchartdata);
+        $chart = new \core\chart_line();
 
-	    $this->content         =  new stdClass;
-	    $this->content->text   = $html;
-	    $this->content->footer = '';
-	 
-	    return $this->content;
-	}
+        $eventlist = report_eventlist_list_generator::get_all_events_list();
+
+        if ($e1) {
+            if (isset($this->config->customlabel1)) {
+                if (!empty($this->config->customlabel1)) {
+                    $label1 = $this->config->customlabel1;
+                } else {
+                    $label1 = $eventlist[$event1]["raweventname"];
+                }
+            } else {
+                $label1 = $eventlist[$event1]["raweventname"];
+            }
+
+            $series1 = new \core\chart_series($label1, $s1);
+            $chart->add_series($series1);
+        }
+        if ($e2) {
+            if (isset($this->config->customlabel2)) {
+                if (!empty($this->config->customlabel2)) {
+                    $label2 = $this->config->customlabel2;
+                } else {
+                    $label2 = $eventlist[$event2]["raweventname"];
+                }
+            } else {
+                $label2 = $eventlist[$event2]["raweventname"];
+            }
+            $series2 = new \core\chart_series($label2, $s2);
+            $chart->add_series($series2);
+        }
+        if ($e3) {
+            if (isset($this->config->customlabel3)) {
+                if (!empty($this->config->customlabel3)) {
+                    $label3 = $this->config->customlabel3;
+                } else {
+                    $label3 = $eventlist[$event3]["raweventname"];
+                }
+            } else {
+                    $label3 = $eventlist[$event3]["raweventname"];
+            }
+            $series3 = new \core\chart_series($label3, $s3);
+            $chart->add_series($series3);
+        }
+        if ($e4) {
+            if (isset($this->config->customlabel4)) {
+                if (!empty($this->config->customlabel4)) {
+                    $label4 = $this->config->customlabel4;
+                } else {
+                    $label4 = $eventlist[$event4]["raweventname"];
+                }
+            } else {
+                    $label4 = $eventlist[$event4]["raweventname"];
+            }
+            $series4 = new \core\chart_series($label4, $s4);
+            $chart->add_series($series4);
+        }
+        if ($e5) {
+            if (isset($this->config->customlabel5)) {
+                if (!empty($this->config->customlabel5)) {
+                    $label5 = $this->config->customlabel5;
+                } else {
+                    $label5 = $eventlist[$event5]["raweventname"];
+                }
+            } else {
+                    $label5 = $eventlist[$event5]["raweventname"];
+            }
+            $series5 = new \core\chart_series($label5, $s5);
+            $chart->add_series($series5);
+        }
+
+        $chart->set_labels($days);
+
+        if (isset($this->config->showchartdata)) {
+            if ($this->config->showchartdata == 1) {
+                $showchartdata = true;
+            } else {
+                $showchartdata = false;
+            }
+        } else {
+            $showchartdata = false;
+        }
+
+        $html = $OUTPUT->render_chart($chart, $showchartdata);
+
+        $this->content         = new stdClass;
+        $this->content->text   = $html;
+        $this->content->footer = '';
+
+        return $this->content;
+    }
 }

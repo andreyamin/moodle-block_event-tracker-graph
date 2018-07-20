@@ -22,21 +22,28 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die();
+
 $string['pluginname'] = 'Event tracker';
 $string['event_tracker_graph'] = 'Event tracker graph';
 $string['event_tracker_graph:addinstance'] = 'Add a new Event tracker graph block';
 $string['event_tracker_graph:myaddinstance'] = 'Add a new Event tracker graph block to the My Moodle page';
 $string['blocktitle'] = 'Block title';
+$string['dataseries1'] = 'Data series 1';
+$string['dataseries2'] = 'Data series 2';
+$string['dataseries3'] = 'Data series 3';
+$string['dataseries4'] = 'Data series 4';
+$string['dataseries5'] = 'Data series 5';
 $string['event1'] = 'Event 1';
 $string['event2'] = 'Event 2';
 $string['event3'] = 'Event 3';
 $string['event4'] = 'Event 4';
 $string['event5'] = 'Event 5';
-$string['enablevent1'] = 'Enable event 1';
-$string['enablevent2'] = 'Enable event 2';
-$string['enablevent3'] = 'Enable event 3';
-$string['enablevent4'] = 'Enable event 4';
-$string['enablevent5'] = 'Enable event 4';
+$string['enablevent1'] = 'Enable data series 1';
+$string['enablevent2'] = 'Enable data series 2';
+$string['enablevent3'] = 'Enable data series 3';
+$string['enablevent4'] = 'Enable data series 4';
+$string['enablevent5'] = 'Enable data series 5';
 $string['showchartdata'] = 'Show chart data';
 $string['customlabel'] = 'Custom label';
 $string['defaulttitle'] = 'Default title';
