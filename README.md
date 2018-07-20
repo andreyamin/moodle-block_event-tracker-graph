@@ -1,3 +1,4 @@
+# Event Tracker block for Moodle
 The event tracker graph block show a chart with the weekly trend of events of your choice. It allow you to select up to five different events to calculate the daily totals from the last week.
 ![](https://lh5.googleusercontent.com/WYzl2DNr-a5f6-VQUsUHXQ4RwWb69oPKFzesfxjPL_QVzfPpYH9z5J_VPlud_64U8fTIVJ8t779q-Q=w3252-h1860-rw)
 Admins can use it to track site access, login errors, password resets etc. Course creators could measure engagement monitoring number of topics and messages in forum.
