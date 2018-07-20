@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_event_tracker_graph';
-$plugin->version = 2018071705;
-$plugin->release = '3.5.5';
+$plugin->version = 2018071706;
+$plugin->release = '3.5.6';
 $plugin->requires = 2018051700;
 $plugin->maturity = MATURITY_STABLE;
