@@ -5,12 +5,12 @@ Admins can use it to track site access, login errors, password resets etc. Cours
 # Instalation 
 ## Using the zip file
 1. unzip the under the /blocks folder on your moodle install
-2. Make sure the plugin folder name is event_block_graph
+2. Make sure the plugin folder name is event_tracker_graph
 3. Go to /admin and run the install process
 ## With git
 1. Go to /blocks folder
-2. Run git clone https://github.com/andreyamin/moodle-block_event-tracker-graph.git event_graph_graph
-3. Cd event_graph_graph
+2. Run git clone https://github.com/andreyamin/moodle-block_event-tracker-graph.git event_tracker_graph
+3. Cd event_tracker_graph
 4. git checkout MOODLE_35_STABLE
 # Configuration
 ## Block options
