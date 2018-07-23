@@ -121,35 +121,35 @@ class block_event_tracker_graph extends block_base {
             if ($e1) {
 
                 $event1 = $this->config->event1;
-                $cond1 = $basecond . " AND eventname = '" . $event1 . "'";
+                $cond1 = $basecond . " AND eventname = '" . $DB->sql_compare_text($event1) . "'";
                 $s1[] = $DB->count_records_select('logstore_standard_log', $cond1);
 
             }
             if ($e1) {
 
                 $event2 = $this->config->event2;
-                $cond2 = $basecond . " AND eventname = '" . $event2 . "'";
+                $cond2 = $basecond . " AND eventname = '" . $DB->sql_compare_text($event2) . "'";
                 $s2[] = $DB->count_records_select('logstore_standard_log', $cond2);
 
             }
             if ($e3) {
 
                 $event3 = $this->config->event3;
-                $cond3 = $basecond . " AND eventname = '" . $event3 . "'";
+                $cond3 = $basecond . " AND eventname = '" . $DB->sql_compare_text($event3) . "'";
                 $s3[] = $DB->count_records_select('logstore_standard_log', $cond3);
 
             }
             if ($e4) {
 
                 $event4 = $this->config->event4;
-                $cond4 = $basecond . " AND eventname = '" . $event4 . "'";
+                $cond4 = $basecond . " AND eventname = '" . $DB->sql_compare_text($event4) . "'";
                 $s4[] = $DB->count_records_select('logstore_standard_log', $cond4);
 
             }
             if ($e5) {
 
                 $event5 = $this->config->event5;
-                $cond5 = $basecond . " AND eventname = '" . $event5 . "'";
+                $cond5 = $basecond . " AND eventname = '" . $DB->sql_compare_text($event5) . "'";
                 $s5[] = $DB->count_records_select('logstore_standard_log', $cond5);
 
             }
