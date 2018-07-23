@@ -102,13 +102,13 @@ class block_event_tracker_graph extends block_base {
         }
 
         $wd = [
-            1 => 'Sunday',
-            2 => 'Monday',
-            3 => 'Tuesday',
-            4 => 'Wednesday',
-            5 => 'Thursday',
-            6 => 'Friday',
-            7 => 'Saturday'
+            1 => get_string('sunday','core_calendar'),
+            2 => get_string('monday','core_calendar'),
+            3 => get_string('tuesday','core_calendar'),
+            4 => get_string('wednesday','core_calendar'),
+            5 => get_string('thursday','core_calendar'),
+            6 => get_string('friday','core_calendar'),
+            7 => get_string('saturday','core_calendar')
             ];
 
         for ($i = 1; $i <= 7; $i++) {
