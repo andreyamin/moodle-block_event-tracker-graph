@@ -116,41 +116,45 @@ class block_event_tracker_graph extends block_base {
             $timefrom = $start + $i * 24 * 3600;
             $timeto = $timefrom + 24 * 3600;
 
-            $basecond = "timecreated > " . $timefrom . " AND timecreated < " . $timeto;
+            $sql = "SELECT count(*)
+                    FROM {logstore_standard_log}
+                    WHERE timecreated > ?
+                    AND timecreated < ?
+                    AND eventname = ?";
 
             if ($e1) {
 
                 $event1 = $this->config->event1;
-                $cond1 = $basecond . " AND eventname = '" . $DB->sql_compare_text($event1) . "'";
-                $s1[] = $DB->count_records_select('logstore_standard_log', $cond1);
+                $cond1 = array($timefrom, $timeto, $event1);
+                $s1[] = $DB->count_records_sql($sql, $cond1);
 
             }
             if ($e1) {
 
                 $event2 = $this->config->event2;
-                $cond2 = $basecond . " AND eventname = '" . $DB->sql_compare_text($event2) . "'";
-                $s2[] = $DB->count_records_select('logstore_standard_log', $cond2);
+                $cond2 = array($timefrom, $timeto, $event2);
+                $s2[] = $DB->count_records_sql($sql, $cond2);
 
             }
             if ($e3) {
 
                 $event3 = $this->config->event3;
-                $cond3 = $basecond . " AND eventname = '" . $DB->sql_compare_text($event3) . "'";
-                $s3[] = $DB->count_records_select('logstore_standard_log', $cond3);
+                $cond3 = array($timefrom, $timeto, $event3);
+                $s3[] = $DB->count_records_sql($sql, $cond3);
 
             }
             if ($e4) {
 
                 $event4 = $this->config->event4;
-                $cond4 = $basecond . " AND eventname = '" . $DB->sql_compare_text($event4) . "'";
-                $s4[] = $DB->count_records_select('logstore_standard_log', $cond4);
+                $cond4 = array($timefrom, $timeto, $event4);
+                $s4[] = $DB->count_records_sql($sql, $cond4);
 
             }
             if ($e5) {
 
                 $event5 = $this->config->event5;
-                $cond5 = $basecond . " AND eventname = '" . $DB->sql_compare_text($event5) . "'";
-                $s5[] = $DB->count_records_select('logstore_standard_log', $cond5);
+                $cond5 = array($timefrom, $timeto, $event5);
+                $s5[] = $DB->count_records_sql($sql, $cond5);
 
             }
 
