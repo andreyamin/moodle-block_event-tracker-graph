@@ -129,7 +129,7 @@ class block_event_tracker_graph extends block_base {
                 $s1[] = $DB->count_records_sql($sql, $cond1);
 
             }
-            if ($e1) {
+            if ($e2) {
 
                 $event2 = $this->config->event2;
                 $cond2 = array($timefrom, $timeto, $event2);
