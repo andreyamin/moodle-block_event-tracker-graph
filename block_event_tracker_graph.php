@@ -102,13 +102,13 @@ class block_event_tracker_graph extends block_base {
         }
 
         $wd = [
-            1 => get_string('sunday','core_calendar'),
-            2 => get_string('monday','core_calendar'),
-            3 => get_string('tuesday','core_calendar'),
-            4 => get_string('wednesday','core_calendar'),
-            5 => get_string('thursday','core_calendar'),
-            6 => get_string('friday','core_calendar'),
-            7 => get_string('saturday','core_calendar')
+            1 => get_string('sunday', 'core_calendar'),
+            2 => get_string('monday', 'core_calendar'),
+            3 => get_string('tuesday', 'core_calendar'),
+            4 => get_string('wednesday', 'core_calendar'),
+            5 => get_string('thursday', 'core_calendar'),
+            6 => get_string('friday', 'core_calendar'),
+            7 => get_string('saturday', 'core_calendar')
             ];
 
         for ($i = 1; $i <= 7; $i++) {
@@ -163,19 +163,16 @@ class block_event_tracker_graph extends block_base {
 
         $chart = new \core\chart_line();
 
-        $eventlist = report_eventlist_list_generator::get_all_events_list();
-
         if ($e1) {
             if (isset($this->config->customlabel1)) {
                 if (!empty($this->config->customlabel1)) {
                     $label1 = $this->config->customlabel1;
                 } else {
-                    $label1 = $eventlist[$event1]["raweventname"];
+                    $label1 = explode("\\", $event1)[3];
                 }
             } else {
-                $label1 = $eventlist[$event1]["raweventname"];
+                $label1 = explode("\\", $event1)[3];
             }
-
             $series1 = new \core\chart_series($label1, $s1);
             $chart->add_series($series1);
         }
@@ -184,10 +181,10 @@ class block_event_tracker_graph extends block_base {
                 if (!empty($this->config->customlabel2)) {
                     $label2 = $this->config->customlabel2;
                 } else {
-                    $label2 = $eventlist[$event2]["raweventname"];
+                    $label2 = explode("\\", $event2)[3];
                 }
             } else {
-                $label2 = $eventlist[$event2]["raweventname"];
+                $label2 = explode("\\", $event2)[3];
             }
             $series2 = new \core\chart_series($label2, $s2);
             $chart->add_series($series2);
@@ -197,10 +194,10 @@ class block_event_tracker_graph extends block_base {
                 if (!empty($this->config->customlabel3)) {
                     $label3 = $this->config->customlabel3;
                 } else {
-                    $label3 = $eventlist[$event3]["raweventname"];
+                    $label3 = explode("\\", $event3)[3];
                 }
             } else {
-                    $label3 = $eventlist[$event3]["raweventname"];
+                $label3 = explode("\\", $event3)[3];
             }
             $series3 = new \core\chart_series($label3, $s3);
             $chart->add_series($series3);
@@ -210,10 +207,10 @@ class block_event_tracker_graph extends block_base {
                 if (!empty($this->config->customlabel4)) {
                     $label4 = $this->config->customlabel4;
                 } else {
-                    $label4 = $eventlist[$event4]["raweventname"];
+                    $label4 = explode("\\", $event4)[3];
                 }
             } else {
-                    $label4 = $eventlist[$event4]["raweventname"];
+                $label4 = explode("\\", $event4)[3];
             }
             $series4 = new \core\chart_series($label4, $s4);
             $chart->add_series($series4);
@@ -223,10 +220,10 @@ class block_event_tracker_graph extends block_base {
                 if (!empty($this->config->customlabel5)) {
                     $label5 = $this->config->customlabel5;
                 } else {
-                    $label5 = $eventlist[$event5]["raweventname"];
+                    $label5 = explode("\\", $event5)[3];
                 }
             } else {
-                    $label5 = $eventlist[$event5]["raweventname"];
+                $label5 = explode("\\", $event5)[3];
             }
             $series5 = new \core\chart_series($label5, $s5);
             $chart->add_series($series5);
